@@ -6,8 +6,18 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <div class="buttons">
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
+    <div>
+        <div class="result"></div>
+        <div class="current-score"></div>
+    </div>
     <script>
-        //const playerSelection = prompt("Rock, Paper, Scissors? ");
+        let playerWins = 0;
+        let computerWins = 0;
 
         function getComputerChoice() {
             const selection = ["rock", "paper", "scissors"];
@@ -18,7 +28,6 @@
         function playRound(playerSelection, computerSelection) {
             playerSelection = playerSelection.toLowerCase();
 
-            
             if (playerSelection == "rock" && computerSelection == "paper") {
                 return "loser";
             }
@@ -50,36 +59,49 @@
                 return "wrong"
             }
         }
-        
-        function game() {
-            let playerWins = 0;
-            let computerWins = 0;
 
-            for (let i = 0; i < 5; i++) {
-                const playerSelection = prompt("Rock, Paper, Scissors? ");
-                const computerSelection = getComputerChoice();
-                const result = playRound(playerSelection, computerSelection);
+        const displayResult = document.querySelector('.result');
+        const currentScore = document.querySelector('.current-score');
 
-                if (result == "winner") {
-                    console.log("You win! " + playerSelection + " beat " + computerSelection + ".");
-                    playerWins++;
-                }
-                else if (result == "loser") {
-                    console.log("You lose! " + computerSelection + " beat " + playerSelection + ".");
-                    computerWins++;
-                }
-                else if (result == "draw") {
-                    console.log("Draw!");
-                }
-                else {
-                    console.log("Wrong input!")
-                }
+        function scoreCheck() {
+            if (playerWins == 5) {
+                displayResult.textContent = "You won!";
+            } else if (computerWins == 5) {
+                displayResult.textContent = "You lost!";
             }
-
-            console.log("Score is You " + playerWins + " : " + computerWins + "  Computer.")
         }
 
-        game();
+        function game(playerSelection) {
+            const computerSelection = getComputerChoice();
+            const result = playRound(playerSelection, computerSelection);
+
+            if (result == "winner") {
+                displayResult.textContent = "You win! " + playerSelection + " beat " + computerSelection + ".";
+                playerWins++;
+            }
+            else if (result == "loser") {
+                displayResult.textContent = "You lose! " + computerSelection + " beat " + playerSelection + ".";
+                computerWins++;
+            }
+            else if (result == "draw") {
+                displayResult.textContent = "Draw!";
+            }
+            else {
+                displayResult.textContent = "Wrong input!";
+            }
+
+            currentScore.textContent = "Score is You " + playerWins + " : " + computerWins + "  Computer.";
+
+            scoreCheck();
+        }
+
+        const buttons = document.querySelectorAll('button');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', event => {
+                game(button.className);
+            });
+        });
     </script>
 </body>
 </html>
