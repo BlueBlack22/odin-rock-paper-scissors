@@ -49,7 +49,7 @@ const buttons = document.querySelectorAll('buttons');
 const rockBtn = document.querySelector('.rock');
 const paperBtn = document.querySelector('.paper');
 const scissorsBtn = document.querySelector('.scissors');
-const playAgain = document.querySelector('.play-again')
+const playAgain = document.querySelector('.play-again');
 
 function scoreCheck() {
     if (playerWins == 5) {
@@ -65,6 +65,8 @@ function endGame() {
     rockBtn.disabled = true;
     paperBtn.disabled = true;
     scissorsBtn.disabled = true;
+    playAgain.disabled = false;
+    playAgain.style.cssText = 'visibility: visible;'
 }
 
 function game(playerSelection) {
@@ -72,11 +74,11 @@ function game(playerSelection) {
     const result = playRound(playerSelection, computerSelection);
 
     if (result == "winner") {
-        displayResult.textContent = "You win! " + playerSelection + " beat " + computerSelection + ".";
+        displayResult.textContent = "You win! " + playerSelection + " beats " + computerSelection;
         playerWins++;
     }
     else if (result == "loser") {
-        displayResult.textContent = "You lose! " + computerSelection + " beat " + playerSelection + ".";
+        displayResult.textContent = "You lose! " + computerSelection + " beats " + playerSelection;
         computerWins++;
     }
     else if (result == "draw") {
@@ -86,7 +88,7 @@ function game(playerSelection) {
         displayResult.textContent = "Wrong input!";
     }
 
-    currentScore.textContent = "Score is You " + playerWins + " : " + computerWins + "  Computer.";
+    currentScore.textContent = "You " + playerWins + " : " + computerWins + "  Computer";
 
     scoreCheck();
 }
@@ -94,3 +96,4 @@ function game(playerSelection) {
 rockBtn.addEventListener('click', () => game("rock"));
 paperBtn.addEventListener('click', () => game("paper"));
 scissorsBtn.addEventListener('click', () => game("scissors"));
+playAgain.addEventListener('click', () => window.location.reload());

@@ -1,12 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap');
 
+body,
+html {
+    height: 100%;
+}
+
 body {
-    background-color: rgb(201, 123, 95);
+    background-color: #4C5C68;
     font-family: Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 div {
-    border: 1px solid black;
+    padding: 10px;
+    color: #DCDCDD;
 }
 
 .container {
@@ -20,6 +29,7 @@ div {
 
 .play-again {
     visibility: hidden;
+    margin-top: 10px;
 }
 
 .buttons {
@@ -27,8 +37,20 @@ div {
     gap: 16px;
 }
 
+.result,
+.current-score {
+    min-width: 400px;
+    min-height: 30px;
+    font-size: 40px;
+}
+
 .rock,
 .paper,
-.scissors {
-    background-color: palevioletred;
+.scissors,
+.play-again {
+    background-color: #C5C3C6;
+    width: 100px;
+    height: 30px;
+    border: 2px solid #46494C;
+    border-radius: 5px;
 }
